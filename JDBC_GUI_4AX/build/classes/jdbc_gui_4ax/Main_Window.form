@@ -87,7 +87,7 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtComm" alignment="0" pref="113" max="32767" attributes="0"/>
+                                          <Component id="txtComm" alignment="0" pref="107" max="32767" attributes="0"/>
                                           <Component id="txtJob" max="32767" attributes="0"/>
                                           <Component id="txtEName" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtSalary" alignment="0" max="32767" attributes="0"/>
@@ -111,11 +111,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="Connect" min="-2" pref="85" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jTextField4" min="-2" pref="103" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="Disconnect" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="Disconnect" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="nachVorne" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -169,7 +165,6 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="Port_INPUT" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="Password" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -372,10 +367,8 @@
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
+        <Property name="text" type="java.lang.String" value="scott"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -406,7 +399,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="Database">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel11"/>
+        <Property name="text" type="java.lang.String" value="Database"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Password">

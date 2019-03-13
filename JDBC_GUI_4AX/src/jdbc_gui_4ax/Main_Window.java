@@ -26,6 +26,7 @@ public class Main_Window extends javax.swing.JFrame {
     /**
      * Creates new form Main_Window
      */
+        
     public Main_Window() {
         initComponents();
         
@@ -80,7 +81,6 @@ public class Main_Window extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -183,7 +183,7 @@ public class Main_Window extends javax.swing.JFrame {
 
         jLabel6.setText("Custom SQL Statement for SELECT");
 
-        jTextField4.setText("jTextField4");
+        jTextField3.setText("scott");
 
         jLabel7.setText("Mgr");
 
@@ -193,7 +193,7 @@ public class Main_Window extends javax.swing.JFrame {
 
         User.setText("User");
 
-        Database.setText("jLabel11");
+        Database.setText("Database");
 
         Password.setText("Password");
 
@@ -238,7 +238,7 @@ public class Main_Window extends javax.swing.JFrame {
                                             .addComponent(jLabel5))
                                         .addGap(24, 24, 24)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtComm, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                            .addComponent(txtComm, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                             .addComponent(txtJob)
                                             .addComponent(txtEName)
                                             .addComponent(txtSalary)
@@ -257,10 +257,7 @@ public class Main_Window extends javax.swing.JFrame {
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(Connect, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Disconnect))
+                                    .addComponent(Disconnect, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(nachVorne)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -302,7 +299,6 @@ public class Main_Window extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(Port_INPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Password)))))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -357,7 +353,7 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void ConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectActionPerformed
         try{
-         con = DriverManager.getConnection("jdbc:mysql://" + Server_INPUT.getText() + ":3306/scott","root", "");
+         con = DriverManager.getConnection("jdbc:mysql://" + Server_INPUT.getText() + ":3306/1819_4ax_antoniojakova_scott","root", "");
          Connect.setEnabled(false);
          Disconnect.setEnabled(true);
          Server_INPUT.setEnabled(false);
@@ -373,17 +369,17 @@ public class Main_Window extends javax.swing.JFrame {
         res_selectAll= stmt_selectALL.executeQuery();
         
         if(res_selectAll.next()){
-        int id = res_selectAll.getInt("ID");
-        String Ename = res_selectAll.getString("Name");
-        int salary = res_selectAll.getInt("Salary");
+        int empno= res_selectAll.getInt("Empno");
+        String Ename = res_selectAll.getString("Ename");
+        int salary = res_selectAll.getInt("Sal");
         String job = res_selectAll.getString("Job");
-        int comm = res_selectAll.getInt("Commision");
+        double comm = res_selectAll.getInt("Comm");
         int mgr=res_selectAll.getInt("Mgr");
         String hiredate=res_selectAll.getString("Hiredate");
         int deptno=res_selectAll.getInt("Deptno");
         
         
-        txtID.setText(""+id);
+        txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary);
         txtJob.setText(job);
@@ -395,9 +391,8 @@ public class Main_Window extends javax.swing.JFrame {
         
         }
         
-            
-        stmt_add =con.prepareStatement(
-                "INSERT INTO CITY (name,countrycode,district,population) values(?,?,?,?)"
+            stmt_add =con.prepareStatement(
+                "INSERT INTO EMP (Ename,salary,job,comm,mgr,hiredate,deptno) values(?,?,?,?,?,?,?)"
             );
 
         }catch(SQLException ex){
@@ -441,18 +436,18 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void nachVorneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nachVorneActionPerformed
          try {
-       if(res_selectAll.next()){
-        int id = res_selectAll.getInt("ID");
-        String Ename = res_selectAll.getString("Name");
-        int salary = res_selectAll.getInt("Salary");
+        if(res_selectAll.next()){
+        int empno= res_selectAll.getInt("Empno");
+        String Ename = res_selectAll.getString("Ename");
+        int salary = res_selectAll.getInt("Sal");
         String job = res_selectAll.getString("Job");
-        int comm = res_selectAll.getInt("Commision");
+        double comm = res_selectAll.getInt("Comm");
         int mgr=res_selectAll.getInt("Mgr");
         String hiredate=res_selectAll.getString("Hiredate");
         int deptno=res_selectAll.getInt("Deptno");
         
         
-        txtID.setText(""+id);
+        txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary);
         txtJob.setText(job);
@@ -476,17 +471,17 @@ public class Main_Window extends javax.swing.JFrame {
     private void ZurückActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZurückActionPerformed
  try {
            if(res_selectAll.previous()){
-        int id = res_selectAll.getInt("ID");
-        String Ename = res_selectAll.getString("Name");
-        int salary = res_selectAll.getInt("Salary");
+       int empno= res_selectAll.getInt("Empno");
+        String Ename = res_selectAll.getString("Ename");
+        int salary = res_selectAll.getInt("Sal");
         String job = res_selectAll.getString("Job");
-        int comm = res_selectAll.getInt("Commision");
+        double comm = res_selectAll.getInt("Comm");
         int mgr=res_selectAll.getInt("Mgr");
         String hiredate=res_selectAll.getString("Hiredate");
         int deptno=res_selectAll.getInt("Deptno");
         
         
-        txtID.setText(""+id);
+        txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary);
         txtJob.setText(job);
@@ -501,7 +496,7 @@ public class Main_Window extends javax.swing.JFrame {
         
         }catch(SQLException ex){
              System.out.println("konnte nicht gemacht werden.");
-             javax.swing.JOptionPane.showMessageDialog(this, "Selekt kann nicht gemacht werden.");
+             javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
         }        
     }//GEN-LAST:event_ZurückActionPerformed
 
@@ -517,24 +512,32 @@ public class Main_Window extends javax.swing.JFrame {
        try{
        stmt_add.setString(1, txtEName.getText());
        stmt_add.setString(2, txtSalary.getText());
-       stmt_add.setString(3, txtJob.getText());
        int comm=Integer.parseInt(txtComm.getText());
-       stmt_add.setInt(4, comm);
+       stmt_add.setInt(3, comm);
+       stmt_add.setString(4, txtJob.getText());
+       
+       
+       int mgr=Integer.parseInt(txtMgr.getText());
+       stmt_add.setInt(5, mgr);
+         int deptno=Integer.parseInt(txtDeptno.getText());
+       stmt_add.setInt(6, deptno);
+       
+       stmt_add.setString(7, txtHiredate.getText());
        
        
        int rows_changed=stmt_add.executeUpdate();
        
        if(rows_changed > 0){
-       javax.swing.JOptionPane.showMessageDialog(this, "Stadt wurde eingefügt");
+       javax.swing.JOptionPane.showMessageDialog(this, "Angestellter wurde eingefügt");
 
        }
        else{
-           javax.swing.JOptionPane.showMessageDialog(this, "Stadt wurde nicht eingefügt");
+           javax.swing.JOptionPane.showMessageDialog(this, "Angestellter wurde nicht eingefügt");
        }
        }
        
        catch(SQLException ex){
-             System.out.println("Error adding city.");
+             System.out.println("Error adding employeee");
              javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
        }
        
@@ -605,7 +608,6 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JButton nachVorne;
     private javax.swing.JTextField txtComm;
     private javax.swing.JTextField txtDeptno;
