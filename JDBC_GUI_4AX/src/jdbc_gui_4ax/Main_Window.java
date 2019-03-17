@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -21,6 +24,7 @@ public class Main_Window extends javax.swing.JFrame {
         Connection con=null;
         PreparedStatement stmt_selectALL=null;
         PreparedStatement stmt_add=null;
+        PreparedStatement stmt_del=null;
         ResultSet res_selectAll=null;
    
     /**
@@ -504,7 +508,28 @@ public class Main_Window extends javax.swing.JFrame {
     }//GEN-LAST:event_ZurückActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        txtID.setText("");
+        
+  try{
+        	stmt_del = con.prepareStatement(
+					"DELETE FROM EMP WHERE EMPNO = ?");
+	        int id = Integer.parseInt(txtID.getText());
+	        stmt_del.setInt(1, id);
+	        int rows_deleted = stmt_del.executeUpdate();
+
+	        
+	        if(rows_deleted > 0){
+	        javax.swing.JOptionPane.showMessageDialog(this, "Employer deleted successfully");
+
+	        }
+	        else{
+	            javax.swing.JOptionPane.showMessageDialog(this, "Error!");
+	        }
+	        
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+    	txtID.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
@@ -513,20 +538,32 @@ public class Main_Window extends javax.swing.JFrame {
        //Statement ausführen
        //Fehlermeldung,wenn es kein Add gegeben hat.
        try{
-       stmt_add.setString(1, txtEName.getText());
-       stmt_add.setString(2, txtSalary.getText());
-       int comm=Integer.parseInt(txtComm.getText());
-       stmt_add.setInt(3, comm);
-       stmt_add.setString(4, txtJob.getText());
-       
-       
+         stmt_add.setString(1, txtEName.getText());
+
+       stmt_add.setString(2, txtJob.getText());
+
        int mgr=Integer.parseInt(txtMgr.getText());
-       stmt_add.setInt(5, mgr);
-         int deptno=Integer.parseInt(txtDeptno.getText());
-       stmt_add.setInt(6, deptno);
+       stmt_add.setInt(3, mgr);
+
+       Date hireDate = null;
+      	try {
+		hireDate = new SimpleDateFormat("yyyy-MM-dd").parse(txtHiredate.getText());
+      	} catch (ParseException e) {
+		e.printStackTrace();
+      	}
+       java.sql.Date date = new java.sql.Date(hireDate.getTime());
+       stmt_add.setDate(4, date);
+
+       double sal = Double.parseDouble(txtSalary.getText());
+       stmt_add.setDouble(5, sal);
        
-       stmt_add.setString(7, txtHiredate.getText());
        
+       double comm = Double.parseDouble(txtComm.getText());
+       stmt_add.setDouble(6, comm);
+       
+       int deptno=Integer.parseInt(txtDeptno.getText());
+       stmt_add.setInt(7, deptno);
+
        
        int rows_changed=stmt_add.executeUpdate();
        
@@ -540,6 +577,7 @@ public class Main_Window extends javax.swing.JFrame {
        }
        
        catch(SQLException ex){
+           ex.printStackTrace();
              System.out.println("Error adding employeee");
              javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
        }
