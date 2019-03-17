@@ -14,6 +14,7 @@ INSERT INTO DEPT VALUES (30,'SALES', 'CHICAGO');
 INSERT INTO DEPT VALUES (40,'OPERATIONS', 'BOSTON');
 
 CREATE TABLE emp (
+  id int primary key auto_increment,
   EMPNO int NOT NULL default 0000,
   ENAME char(10) default NULL,
   JOB char(9) default NULL,
