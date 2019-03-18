@@ -14,8 +14,7 @@ INSERT INTO DEPT VALUES (30,'SALES', 'CHICAGO');
 INSERT INTO DEPT VALUES (40,'OPERATIONS', 'BOSTON');
 
 CREATE TABLE emp (
-  id int primary key auto_increment,
-  EMPNO int NOT NULL default 0000,
+  EMPNO int NOT NULL auto_increment,
   ENAME char(10) default NULL,
   JOB char(9) default NULL,
   MGR int default NULL,
@@ -23,6 +22,7 @@ CREATE TABLE emp (
   SAL double default NULL,
   COMM double default NULL,
   DEPTNO int default NULL,
+  FOREIGN KEY (`DEPTNO`) REFERENCES `dept`(`DEPTNO`),
   PRIMARY KEY (EMPNO)
 );
 

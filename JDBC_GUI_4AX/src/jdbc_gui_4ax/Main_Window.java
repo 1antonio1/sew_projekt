@@ -399,8 +399,8 @@ public class Main_Window extends javax.swing.JFrame {
         }
         
             stmt_add =con.prepareStatement(
-                "INSERT INTO EMP (Ename,salary,job,comm,mgr,hiredate,deptno) values(?,?,?,?,?,?,?)"
-            );
+                "INSERT INTO EMP (Ename,job,mgr,hiredate,sal,comm,deptno) values(?,?,?,?,?,?,?)"
+            ); 
 
         }catch(SQLException ex){
              System.out.println("konnte nicht gemacht werden.");
