@@ -224,6 +224,12 @@ public class Main_Window extends javax.swing.JFrame {
 
         jLabel10.setText("Deptno");
 
+        txtDeptno2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDeptno2ActionPerformed(evt);
+            }
+        });
+
         jLabel11.setText("DName");
 
         jLabel12.setText("Loc");
@@ -493,24 +499,29 @@ public class Main_Window extends javax.swing.JFrame {
             
     private void ConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectActionPerformed
         try{
+         //Verbindung mit der Database
          con = DriverManager.getConnection("jdbc:mysql://" + Server_INPUT.getText() + ":3306/1819_4ax_antoniojakova_scott","root", "");
          Connect.setEnabled(false);
          Disconnect.setEnabled(true);
          Server_INPUT.setEnabled(false);
         }
         
+        //Fehlermeldung falls Fehler bei der Herstellung der Datenbank.
         catch(SQLException ex){
             System.out.println("Verbindung mit der Datenbank konnte nicht hergestellt werden.");
             javax.swing.JOptionPane.showMessageDialog(this, "Datenbank kann nicht geladen werden.");
             
         }
          try {
+        //************ query qe therret kur klikon connection per me te kariku gjithcka prej tabeles emp  
+        //select all statement-->prepared statement     
         stmt_selectALL = con.prepareStatement("SELECT * FROM EMP");
+        
+        //alles wird in einer result set gespeichert
         res_selectAll= stmt_selectALL.executeQuery();
         
-
-        
-        
+        //************ merr rezultatet prej queryt qe ke ekzekutu tu pase parasysh tipet te kane atributet(datatypes)
+        //in der ResultSet wird jede nächste Spalte überprüft
         if(res_selectAll.next()){
         int empno= res_selectAll.getInt("Empno");
         String Ename = res_selectAll.getString("Ename");
@@ -522,6 +533,7 @@ public class Main_Window extends javax.swing.JFrame {
         int deptno=res_selectAll.getInt("Deptno");
         
         
+        //********** ktu i seton textfieldat ne baze te rezultateve te perparshme
         txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary); 
@@ -531,34 +543,43 @@ public class Main_Window extends javax.swing.JFrame {
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
         
-        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT where deptno = ?");
-        stmt_selectALL2.setInt(1,deptno);
+        //************ query qe therret kur klikon connection per me te kariku gjithcka prej tabeles dept  
+        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT");
         
         res_selectAll2= stmt_selectALL2.executeQuery();
         }
         
         if(res_selectAll2.next()){
-        
+                //************ merr rezultatet prej queryt qe ke ekzekutu tu pase parasysh tipet te kane atributet(datatypes)
         int deptno2=res_selectAll2.getInt("Deptno");
             System.out.println(deptno2);
         String Dname = res_selectAll2.getString("Dname");
         String loc = res_selectAll2.getString("Loc");
         
-        
-        txtDeptno.setText(""+deptno2);
+        //********** ktu i seton textfieldat ne baze te rezultateve te perparshme
+        txtDeptno2.setText(""+deptno2);
         txtDName.setText(Dname);
         txtLoc.setText(loc);
         
           
         }
+        
+        //********** ktu pergatit queryn te perdor per me shtu nji employer, ku empno(PK) nuk asht sepse e ke ba autoincrement ne sql
+        //prepared statement über das insert der Wertte der Tabelle emp mit ? Werten
             stmt_add =con.prepareStatement(
                 "INSERT INTO EMP (Ename,job,mgr,hiredate,sal,comm,deptno) values(?,?,?,?,?,?,?)"
             ); 
             
+        //prepared statement über das insert der Werte der Tabelle emp mit ? Werten
+        
+        //********** ktu pergatit queryn te perdor per me shtu nji departament, ktu e ke deptno(PK) sepse nuk e ke ba autoincrement ne sql e
+        //********** mundesh me i vu nji deptno ca tdush ti
             stmt_add2 =con.prepareStatement(
                 "INSERT INTO DEPT (deptno,Dname,loc) values(?,?,?)"
             ); 
-        }catch(SQLException ex){
+        }
+         // Fehlermeldung falls es beim Ende einen Fehler gibt
+         catch(SQLException ex){
             ex.printStackTrace();
              System.out.println("konnte nicht gemacht werden.");
              javax.swing.JOptionPane.showMessageDialog(this, "Selekt kann nicht gemacht werden.");
@@ -572,6 +593,7 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
          try{
+        //Die verbindung wird geschlossen.
         con.close();
       
          Connect.setEnabled(true);
@@ -579,6 +601,7 @@ public class Main_Window extends javax.swing.JFrame {
          Server_INPUT.setEnabled(false);
         }
         
+         
         catch(SQLException ex){
             System.out.println("Verbindung mit der Datenbank konnte nicht hergestellt werden.");
             javax.swing.JOptionPane.showMessageDialog(this, "Datenbank kann nicht geladen werden.");
@@ -599,7 +622,9 @@ public class Main_Window extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJobActionPerformed
 
     private void nachVorneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nachVorneActionPerformed
-         try {
+        //Programmierung der vorne
+        //************** ktu ke funksionin e butonit djathtas qe i ban next per me marre rezultatin e ardhshem
+        try {
         if(res_selectAll.next()){
         int empno= res_selectAll.getInt("Empno");
         String Ename = res_selectAll.getString("Ename");
@@ -619,6 +644,8 @@ public class Main_Window extends javax.swing.JFrame {
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
        
+   
+        
         }else{
             res_selectAll.beforeFirst();
         }
@@ -645,6 +672,8 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void ZurückActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZurückActionPerformed
  try {
+        //************** ktu ke funksionin e butonit majtas qe i ban previous per me marre rezultatin e perparshem
+
            if(res_selectAll.previous()){
        int empno= res_selectAll.getInt("Empno");
         String Ename = res_selectAll.getString("Ename");
@@ -692,6 +721,9 @@ public class Main_Window extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         
   try{
+      //******** ktu asht query per me fshi rekordin e empit, ku perdor empno per me mujt me seleksionu rekordin qe don me fshi
+      // pra ne baze te textit qe ke te empno e fshin. Empno ne query e ke me ? se asht query e parametrizume. aty poshte ia specifikon
+      // paramentrin qe don me i kalu ne rastin tand setInt(1,id)
         	stmt_del = con.prepareStatement(
 					"DELETE FROM EMP WHERE EMPNO = ?");
                
@@ -719,7 +751,9 @@ public class Main_Window extends javax.swing.JFrame {
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
        
        try{
-       
+       //*** ktu ke queryn per me shtu nji rekord ne emp. ku ke 7 parametra pa id qe e ke autoincrement keshtu qe e gestis vete db. queryn e saj
+       // e ke siper kund dica me inser into emp (...) values (?,?,?...) edhe ktu ia specifikon parametrat ti. gjithmone duhet me kene te 
+       // rendituna se perndryshe nuk e kpt parametrat.
        stmt_add.setString(1, txtEName.getText());
 
        stmt_add.setString(2, txtJob.getText());
@@ -729,6 +763,7 @@ public class Main_Window extends javax.swing.JFrame {
 
        Date hireDate = null;
       	try {
+            //*** kja asht me pranu data vec ne kyt lloj formatit vit-muj-dite
 		hireDate = new SimpleDateFormat("yyyy-MM-dd").parse(txtHiredate.getText());
       	} catch (ParseException e) {
 		e.printStackTrace();
@@ -760,7 +795,7 @@ public class Main_Window extends javax.swing.JFrame {
        }
        
        catch(SQLException ex){
-           ex.printStackTrace();
+          // ex.printStackTrace();
              System.out.println("Error adding employeee");
              javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
        }
@@ -775,7 +810,10 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void btnAddDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDepartmentActionPerformed
 try{
-        
+        //*** ktu ke queryn per me shtu nji rekord ne dept. ku ke 3 parametra me id qe nuk e ke autoincrement. queryn e saj
+       // e ke siper kund dica me inser into dept (...) values (?,?,?) edhe ktu ia specifikon parametrat ti. gjithmone duhet me kene te 
+       // rendituna se perndryshe nuk e kpt parametrat.
+
        int deptno2=Integer.parseInt(txtDeptno2.getText());
        stmt_add2.setInt(1, deptno2);
        
@@ -795,7 +833,7 @@ try{
        }
        
        catch(SQLException ex){
-           ex.printStackTrace();
+           //ex.printStackTrace();
              System.out.println("Error adding department");
              javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
        }
@@ -804,6 +842,11 @@ try{
 
     private void btnDeleteDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDeptActionPerformed
 try{
+          //******** ktu asht query per me fshi rekordin e dept, ku perdor deptno per me mujt me seleksionu rekordin qe don me fshi
+      // pra ne baze te textit qe ke te deptno e fshin. Per me fshi rekordin zakonisht perdoret id pra Primary key, tu kene se asht unik, edhe
+      // arrin me fshi vec nji rekord qe ia specifikon ti. se mundesh me ba edhe delete from emp where ename="clark" por ndoshta ti ke disa
+      // employers me emrin clark e ti fshin tan. prandaj perdoret identifikatori i rekordit pothujse gjithmone
+
         	stmt_del2 = con.prepareStatement(
 					"DELETE FROM DEPT WHERE DEPTNO = ?");
                
@@ -825,7 +868,10 @@ try{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-    	txtID.setText("");
+    	txtDeptno2.setText("");
+        txtDName.setText("");
+        txtLoc.setText("");
+
     }//GEN-LAST:event_btnDeleteDeptActionPerformed
 
     private void btnClearEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearEmpActionPerformed
@@ -847,6 +893,10 @@ try{
         
 javax.swing.JOptionPane.showMessageDialog(this, "Clear gemacht.");
     }//GEN-LAST:event_btnClearDeptActionPerformed
+
+    private void txtDeptno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeptno2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDeptno2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -934,3 +984,4 @@ javax.swing.JOptionPane.showMessageDialog(this, "Clear gemacht.");
     private javax.swing.JTextField txtSalary;
     // End of variables declaration//GEN-END:variables
 }
+
