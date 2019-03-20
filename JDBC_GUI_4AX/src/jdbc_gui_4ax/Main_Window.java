@@ -762,6 +762,9 @@ public class Main_Window extends javax.swing.JFrame {
 			e.printStackTrace();
 		} 
     	txtID.setText(""); //ID der Tabelle wird gelöscht(empno).
+        
+        updateGUI();
+   
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
@@ -892,6 +895,7 @@ try{
         txtDName.setText("");
         txtLoc.setText("");
 
+        updateGUI();
     }//GEN-LAST:event_btnDeleteDeptActionPerformed
 
     private void btnClearEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearEmpActionPerformed
@@ -922,6 +926,67 @@ javax.swing.JOptionPane.showMessageDialog(this, "Clear gemacht.");
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDeptno2ActionPerformed
 
+    private void updateGUI(){
+          try {
+        //select all statement-->prepared statement um alle Elemente der Emp tabelle in der Datenbank zu laden  
+        stmt_selectALL = con.prepareStatement("SELECT * FROM EMP");
+        
+        //Alles von dieser Tabelle(emp) wird in einer result set gespeichert
+        res_selectAll= stmt_selectALL.executeQuery();
+        
+       //Hier bekomme ich das Resultat vom Query ,dass ausgeführ wurde und dazu wurden auch die Datentypen der Attributen beachtet.
+        if(res_selectAll.next()){
+        int empno= res_selectAll.getInt("Empno");
+        String Ename = res_selectAll.getString("Ename");
+        int salary = res_selectAll.getInt("Sal");
+        String job = res_selectAll.getString("Job");
+        double comm = res_selectAll.getInt("Comm");
+        int mgr=res_selectAll.getInt("Mgr");
+        String hiredate=res_selectAll.getString("Hiredate");
+        int deptno=res_selectAll.getInt("Deptno");
+        
+        
+        //hier wurden die TextFields eingestellt basiert auf die vorherigen Resultaten.
+        txtID.setText(""+empno);
+        txtEName.setText(Ename);
+        txtSalary.setText(""+salary); 
+        txtJob.setText(job);
+        txtComm.setText(""+comm);
+        txtMgr.setText(""+mgr);
+        txtHiredate.setText(hiredate);
+        txtDeptno.setText(""+deptno);
+        
+        //select all statement-->prepared statement um alle Elemente der Dept tabelle in der Datenbank zu laden.  
+        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT");
+        
+        //Alles von dieser Tabelle(dept) wird in einer result set gespeichert.
+        res_selectAll2= stmt_selectALL2.executeQuery();
+        }
+        
+        if(res_selectAll2.next()){
+        //Hier wurden die TextFields(für die Dept Tabelle) eingestellt basiert auf die vorherigen Resultaten.
+            int deptno2=res_selectAll2.getInt("Deptno");
+            System.out.println(deptno2);
+        String Dname = res_selectAll2.getString("Dname");
+        String loc = res_selectAll2.getString("Loc");
+        
+                //hier wurden die TextFields eingestellt basiert auf die vorherigen Resultaten.
+
+        txtDeptno2.setText(""+deptno2);
+        txtDName.setText(Dname);
+        txtLoc.setText(loc);
+          
+        }
+        
+        }
+         // Hier ist das Exception(Fehlermeldung) verwendet falls Fehler bei diesem Programmierblock entstehen.
+         catch(SQLException ex){
+            ex.printStackTrace();
+             System.out.println("konnte nicht gemacht werden.");
+             javax.swing.JOptionPane.showMessageDialog(this, "Selekt kann nicht gemacht werden.");
+        }
+    }
+            
     /**
      * @param args the command line arguments
      */
