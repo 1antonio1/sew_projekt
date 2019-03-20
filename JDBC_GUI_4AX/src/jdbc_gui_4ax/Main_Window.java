@@ -23,9 +23,13 @@ public class Main_Window extends javax.swing.JFrame {
     
         Connection con=null;
         PreparedStatement stmt_selectALL=null;
+        PreparedStatement stmt_selectALL2=null;
         PreparedStatement stmt_add=null;
+        PreparedStatement stmt_add2=null;
         PreparedStatement stmt_del=null;
-        ResultSet res_selectAll=null;
+        PreparedStatement stmt_del2=null;
+        ResultSet res_selectAll=null; 
+        ResultSet res_selectAll2=null;
    
     /**
      * Creates new form Main_Window
@@ -102,6 +106,8 @@ public class Main_Window extends javax.swing.JFrame {
         txtLoc = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        AddDepartment = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -172,7 +178,7 @@ public class Main_Window extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setText("Clear");
+        btnClear.setText("Clear Employee");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -194,6 +200,11 @@ public class Main_Window extends javax.swing.JFrame {
         });
 
         jLabel6.setText("Custom SQL Statement for SELECT");
+
+        jTextField1.setEditable(false);
+        jTextField1.setText("root");
+
+        jTextField2.setEditable(false);
 
         jTextField3.setText("scott");
 
@@ -225,6 +236,15 @@ public class Main_Window extends javax.swing.JFrame {
 
         jLabel14.setText("Tabelle Dept");
 
+        AddDepartment.setText("Add Department");
+        AddDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddDepartmentActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Clear Department");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,14 +264,13 @@ public class Main_Window extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addComponent(jLabel3)
                                             .addComponent(jLabel7)
                                             .addComponent(jLabel8)
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel1)
-                                            .addComponent(jLabel5))
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel2))
                                         .addGap(24, 24, 24)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -279,12 +298,12 @@ public class Main_Window extends javax.swing.JFrame {
                                             .addComponent(Password, javax.swing.GroupLayout.Alignment.TRAILING))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnClear, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel12)
                                         .addGap(62, 62, 62)
                                         .addComponent(txtLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(123, 123, 123))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(AddDepartment))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -321,7 +340,12 @@ public class Main_Window extends javax.swing.JFrame {
                                                     .addComponent(Disconnect)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel14)
-                                                        .addGap(170, 170, 170)))))))))
+                                                        .addGap(170, 170, 170))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnClear)
+                                            .addComponent(jButton1))))))
                         .addGap(10, 10, 10))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -378,14 +402,14 @@ public class Main_Window extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtDName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel11))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtDName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -395,28 +419,33 @@ public class Main_Window extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClear))
+                            .addComponent(txtComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDeptno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(txtHiredate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(btnAddEmployee)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDeptno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(txtHiredate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(btnAddEmployee)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AddDepartment)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClear)
+                        .addGap(11, 11, 11)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
@@ -444,6 +473,10 @@ public class Main_Window extends javax.swing.JFrame {
         stmt_selectALL = con.prepareStatement("SELECT * FROM EMP");
         res_selectAll= stmt_selectALL.executeQuery();
         
+        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT");
+        res_selectAll2= stmt_selectALL2.executeQuery();
+        
+        
         if(res_selectAll.next()){
         int empno= res_selectAll.getInt("Empno");
         String Ename = res_selectAll.getString("Ename");
@@ -455,9 +488,6 @@ public class Main_Window extends javax.swing.JFrame {
         int deptno=res_selectAll.getInt("Deptno");
         
         
-       
-        
-
         txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary); 
@@ -467,15 +497,30 @@ public class Main_Window extends javax.swing.JFrame {
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
         
-        
-        
         }
         
+        if(res_selectAll2.next()){
+        
+        int deptno2=res_selectAll2.getInt("Deptno");
+        String Dname = res_selectAll2.getString("Dname");
+        String loc = res_selectAll2.getString("Loc");
+        
+        
+        txtDeptno.setText(""+deptno2);
+        txtDName.setText(Dname);
+        txtLoc.setText(loc);
+        
+          
+        }
             stmt_add =con.prepareStatement(
                 "INSERT INTO EMP (Ename,job,mgr,hiredate,sal,comm,deptno) values(?,?,?,?,?,?,?)"
             ); 
-
+            
+            stmt_add2 =con.prepareStatement(
+                "INSERT INTO DEPT (deptno,Dname,loc) values(?,?,?)"
+            ); 
         }catch(SQLException ex){
+            ex.printStackTrace();
              System.out.println("konnte nicht gemacht werden.");
              javax.swing.JOptionPane.showMessageDialog(this, "Selekt kann nicht gemacht werden.");
         }
@@ -527,6 +572,10 @@ public class Main_Window extends javax.swing.JFrame {
         int deptno=res_selectAll.getInt("Deptno");
         
         
+        int deptno2=res_selectAll2.getInt("Deptno");
+        String Dname = res_selectAll2.getString("Dname");
+        String loc = res_selectAll2.getString("Loc");
+        
         txtID.setText(""+empno);
         txtEName.setText(Ename);
         txtSalary.setText(""+salary);
@@ -536,13 +585,18 @@ public class Main_Window extends javax.swing.JFrame {
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
         
-        
+        txtDeptno.setText(""+deptno);
+        txtDName.setText(Dname);
+        txtLoc.setText(loc);
         
         }else{
             res_selectAll.beforeFirst();
+            res_selectAll2.beforeFirst();
+
         }
         
         }catch(SQLException ex){
+            
              System.out.println("konnte nicht gemacht werden.");
              javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
         }
@@ -569,10 +623,24 @@ public class Main_Window extends javax.swing.JFrame {
         txtMgr.setText(""+mgr);
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
-        
-        }else{
+       }
+        else{
             res_selectAll.afterLast();
+          }
+           
+        if(res_selectAll2.previous()){
+        int deptno2=res_selectAll2.getInt("Deptno");
+        String Dname = res_selectAll2.getString("Dname");
+        String loc = res_selectAll2.getString("Loc");
+        
+        txtDeptno2.setText(""+deptno2);
+        txtDName.setText(Dname);
+        txtLoc.setText(loc);
         }
+        else{
+            res_selectAll2.afterLast();
+              }
+        
         
         }catch(SQLException ex){
              System.out.println("konnte nicht gemacht werden.");
@@ -585,6 +653,10 @@ public class Main_Window extends javax.swing.JFrame {
   try{
         	stmt_del = con.prepareStatement(
 					"DELETE FROM EMP WHERE EMPNO = ?");
+                
+                stmt_del2 = con.prepareStatement(
+					"DELETE FROM DEPT WHERE DEPTNO = ?");
+                
 	        int id = Integer.parseInt(txtID.getText());
 	        stmt_del.setInt(1, id);
 	        int rows_deleted = stmt_del.executeUpdate();
@@ -636,7 +708,7 @@ public class Main_Window extends javax.swing.JFrame {
        
        int deptno=Integer.parseInt(txtDeptno.getText());
        stmt_add.setInt(7, deptno);
-
+       
        
        int rows_changed=stmt_add.executeUpdate();
        
@@ -662,6 +734,35 @@ public class Main_Window extends javax.swing.JFrame {
     private void txtLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocActionPerformed
+
+    private void AddDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDepartmentActionPerformed
+try{
+        
+       int deptno2=Integer.parseInt(txtDeptno2.getText());
+       stmt_add.setInt(1, deptno2);
+       
+       stmt_add.setString(2, txtDName.getText());
+       stmt_add.setString(3, txtLoc.getText());
+
+
+       int rows_changed=stmt_add.executeUpdate();
+       
+       if(rows_changed > 0){
+       javax.swing.JOptionPane.showMessageDialog(this, "Department wurde eingefügt");
+
+       }
+       else{
+           javax.swing.JOptionPane.showMessageDialog(this, "Department wurde nicht eingefügt");
+       }
+       }
+       
+       catch(SQLException ex){
+           ex.printStackTrace();
+             System.out.println("Error adding department");
+             javax.swing.JOptionPane.showMessageDialog(this, "Select kann nicht gemacht werden.");
+       }
+       
+    }//GEN-LAST:event_AddDepartmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -699,6 +800,7 @@ public class Main_Window extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddDepartment;
     private javax.swing.JButton Connect;
     private javax.swing.JLabel Database;
     private javax.swing.JButton Disconnect;
@@ -712,6 +814,7 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnClear;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
