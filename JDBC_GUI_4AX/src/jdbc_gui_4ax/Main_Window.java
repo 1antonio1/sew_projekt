@@ -30,7 +30,7 @@ public class Main_Window extends javax.swing.JFrame {
         PreparedStatement stmt_del2=null;
         ResultSet res_selectAll=null; 
         ResultSet res_selectAll2=null;
-   
+  
     /**
      * Creates new form Main_Window
      */
@@ -108,7 +108,8 @@ public class Main_Window extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         btnAddDepartment = new javax.swing.JButton();
         btnDeleteDept = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
+        btnClearEmp = new javax.swing.JButton();
+        btnClearDept = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -251,10 +252,17 @@ public class Main_Window extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        btnClearEmp.setText("ClearEmp");
+        btnClearEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                btnClearEmpActionPerformed(evt);
+            }
+        });
+
+        btnClearDept.setText("ClearDept");
+        btnClearDept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearDeptActionPerformed(evt);
             }
         });
 
@@ -289,15 +297,21 @@ public class Main_Window extends javax.swing.JFrame {
                                         .addComponent(txtMgr))
                                     .addComponent(txtDeptno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtHiredate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDelete)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Zurück)
                                         .addGap(18, 18, 18)
-                                        .addComponent(nachVorne)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnDelete)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(Zurück)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(nachVorne)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnClearEmp)
+                                        .addGap(25, 25, 25))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -315,10 +329,13 @@ public class Main_Window extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddDepartment))
+                                .addComponent(btnClearDept))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnAddDepartment))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel12)
                                         .addGap(62, 62, 62)
@@ -357,11 +374,7 @@ public class Main_Window extends javax.swing.JFrame {
                                                         .addGap(170, 170, 170))))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnDeleteDept))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(btnClear)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(btnDeleteDept)))))))
                 .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -447,19 +460,15 @@ public class Main_Window extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(txtJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelete))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtMgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtDeptno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClear)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(btnClearEmp))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDeptno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtHiredate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,8 +477,10 @@ public class Main_Window extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addComponent(btnAddDepartment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteDept)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(btnDeleteDept)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearDept)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
@@ -497,8 +508,7 @@ public class Main_Window extends javax.swing.JFrame {
         stmt_selectALL = con.prepareStatement("SELECT * FROM EMP");
         res_selectAll= stmt_selectALL.executeQuery();
         
-        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT");
-        res_selectAll2= stmt_selectALL2.executeQuery();
+
         
         
         if(res_selectAll.next()){
@@ -521,11 +531,16 @@ public class Main_Window extends javax.swing.JFrame {
         txtHiredate.setText(hiredate);
         txtDeptno.setText(""+deptno);
         
+        stmt_selectALL2 = con.prepareStatement("SELECT * FROM DEPT where deptno = ?");
+        stmt_selectALL2.setInt(1,deptno);
+        
+        res_selectAll2= stmt_selectALL2.executeQuery();
         }
         
         if(res_selectAll2.next()){
         
         int deptno2=res_selectAll2.getInt("Deptno");
+            System.out.println(deptno2);
         String Dname = res_selectAll2.getString("Dname");
         String loc = res_selectAll2.getString("Loc");
         
@@ -704,7 +719,8 @@ public class Main_Window extends javax.swing.JFrame {
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
        
        try{
-         stmt_add.setString(1, txtEName.getText());
+       
+       stmt_add.setString(1, txtEName.getText());
 
        stmt_add.setString(2, txtJob.getText());
 
@@ -789,11 +805,11 @@ try{
     private void btnDeleteDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDeptActionPerformed
 try{
         	stmt_del2 = con.prepareStatement(
-					"DELETE FROM EMP WHERE DEPT = ?");
+					"DELETE FROM DEPT WHERE DEPTNO = ?");
                
                 
-	        int id = Integer.parseInt(txtID.getText());
-	        stmt_del2.setInt(1, id);
+	        int deptno2 = Integer.parseInt(txtDeptno2.getText());
+	        stmt_del2.setInt(1, deptno2);
 	        int rows_deleted = stmt_del2.executeUpdate();
 
 	        
@@ -812,7 +828,7 @@ try{
     	txtID.setText("");
     }//GEN-LAST:event_btnDeleteDeptActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void btnClearEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearEmpActionPerformed
         txtEName.setText("");
         txtSalary.setText("");
         txtJob.setText("");
@@ -821,10 +837,16 @@ try{
         txtHiredate.setText("");
         txtDeptno.setText("");
         
+        javax.swing.JOptionPane.showMessageDialog(this, "Clear gemacht.");
+    }//GEN-LAST:event_btnClearEmpActionPerformed
+
+    private void btnClearDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDeptActionPerformed
         txtDeptno2.setText("");
+        txtDName.setText("");
+        txtLoc.setText("");
         
-        
-    }//GEN-LAST:event_btnClearActionPerformed
+javax.swing.JOptionPane.showMessageDialog(this, "Clear gemacht.");
+    }//GEN-LAST:event_btnClearDeptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -874,7 +896,8 @@ try{
     private javax.swing.JButton Zurück;
     private javax.swing.JButton btnAddDepartment;
     private javax.swing.JButton btnAddEmployee;
-    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnClearDept;
+    private javax.swing.JButton btnClearEmp;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteDept;
     private javax.swing.ButtonGroup buttonGroup1;
